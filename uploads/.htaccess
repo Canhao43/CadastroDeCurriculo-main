@@ -1,0 +1,15 @@
+# Proteção para pasta de uploads
+# Permite apenas imagens
+<FilesMatch "\.(jpg|jpeg|png|gif|webp)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+<FilesMatch "^(?!.*\.(jpg|jpeg|png|gif|webp)$).*">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Desabilita execução de scripts
+Options -ExecCGI
+AddHandler cgi-script .php .pl .py .jsp .asp .sh .cgi
