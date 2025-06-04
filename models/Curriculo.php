@@ -12,12 +12,12 @@ class Curriculo {
             nome, cpf, email, ddi, ddd, telefone, nascimento, 
             genero, estado_civil, nacionalidade, cidade, estado,
             formacoes, experiencias, habilidades, idiomas,
-            linkedin, github, site, foto, id_usuario
+            linkedin, github, site, foto, resumo_experiencia, id_usuario
         ) VALUES (
             :nome, :cpf, :email, :ddi, :ddd, :telefone, :nascimento,
             :genero, :estado_civil, :nacionalidade, :cidade, :estado,
             :formacoes, :experiencias, :habilidades, :idiomas,
-            :linkedin, :github, :site, :foto, :id_usuario
+            :linkedin, :github, :site, :foto, :resumo_experiencia, :id_usuario
         )";
         
         try {
@@ -35,14 +35,15 @@ class Curriculo {
                 ':nacionalidade' => $dados['nacionalidade'],
                 ':cidade' => $dados['cidade'],
                 ':estado' => $dados['estado'],
-                ':formacoes' => json_encode($dados['formacoes']),
-                ':experiencias' => json_encode($dados['experiencias']),
-                ':habilidades' => json_encode($dados['habilidades']),
-                ':idiomas' => json_encode($dados['idiomas']),
+                ':formacoes' => $dados['formacoes'],
+                ':experiencias' => $dados['experiencias'],
+                ':habilidades' => $dados['habilidades'],
+                ':idiomas' => $dados['idiomas'],
                 ':linkedin' => $dados['linkedin'],
                 ':github' => $dados['github'],
                 ':site' => $dados['site'],
                 ':foto' => $dados['foto'],
+                ':resumo_experiencia' => $dados['resumo_experiencia'],
                 ':id_usuario' => $id_usuario
             ]);
             return true;
@@ -63,7 +64,7 @@ class Curriculo {
             formacoes = :formacoes, experiencias = :experiencias,
             habilidades = :habilidades, idiomas = :idiomas,
             linkedin = :linkedin, github = :github,
-            site = :site, foto = :foto
+            site = :site, foto = :foto, resumo_experiencia = :resumo_experiencia
             WHERE id = :id AND id_usuario = :id_usuario";
         
         try {
@@ -81,14 +82,15 @@ class Curriculo {
                 ':nacionalidade' => $dados['nacionalidade'],
                 ':cidade' => $dados['cidade'],
                 ':estado' => $dados['estado'],
-                ':formacoes' => json_encode($dados['formacoes']),
-                ':experiencias' => json_encode($dados['experiencias']),
-                ':habilidades' => json_encode($dados['habilidades']),
-                ':idiomas' => json_encode($dados['idiomas']),
+                ':formacoes' => $dados['formacoes'],
+                ':experiencias' => $dados['experiencias'],
+                ':habilidades' => $dados['habilidades'],
+                ':idiomas' => $dados['idiomas'],
                 ':linkedin' => $dados['linkedin'],
                 ':github' => $dados['github'],
                 ':site' => $dados['site'],
                 ':foto' => $dados['foto'],
+                ':resumo_experiencia' => $dados['resumo_experiencia'],
                 ':id' => $id,
                 ':id_usuario' => $id_usuario
             ]);

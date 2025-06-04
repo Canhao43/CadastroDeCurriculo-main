@@ -1,25 +1,241 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const curriculoForm = document.getElementById('curriculoForm');
-
-    if (curriculoForm) {
-        curriculoForm.addEventListener('submit', function (e) {
-            // Validações aqui (exemplo simples)
-            let valid = true;
-            const nome = document.getElementById('nome');
-            if (!nome || nome.value.trim() === '') {
-                alert('O campo Nome é obrigatório.');
-                valid = false;
-            }
-
-            // Se quiser adicionar mais validações, faça aqui
-
-            if (!valid) {
-                e.preventDefault();
-                return;
-            }
-
-            // Se as validações passarem, permitir o envio padrão do formulário
-            // Portanto, não chamar e.preventDefault()
-        });
+$(document).ready(function () {
+    // Máscaras
+    $("#cpf").mask("000.000.000-00", { reverse: true });
+    $("#ddd").mask("00");
+    $("#numero").mask("00000-0000");
+  
+    // Contador de caracteres da experiência
+    $("#descricaoExp").on("input", function () {
+      $("#contador").text($(this).val().length);
+    });
+  
+    // Mostrar/ocultar campo de experiência
+    $("#experiencia, #temExperiencia").on("change", function () {
+      if ($(this).val() === "sim") {
+        $("#campoExperiencia, #experiencias-container, #adicionar-experiencia, #remover-experiencia").removeClass("hidden");
+      } else {
+        $("#campoExperiencia, #experiencias-container, #adicionar-experiencia, #remover-experiencia").addClass("hidden");
+        $("#experiencias-container").html("");
+      }
+    });
+  
+    // Adicionar formação
+    $("#adicionar-formacao").on("click", function () {
+      $("#formacoes-container").append(`
+        <div class="formacao">
+          <label>Curso</label>
+          <input type="text" name="curso[]" placeholder="Ex: Sistemas de Informação">
+          <label>Instituição</label>
+          <input type="text" name="instituicao[]" placeholder="Ex: Universidade FMU">
+          <label>Ano de Início</label>
+          <input type="text" name="anoInicio[]" placeholder="Ex: 2020">
+          <label>Ano de Conclusão</label>
+          <input type="text" name="anoConclusao[]" placeholder="Ex: 2024">
+        </div>
+      `);
+      $("#remover-formacao").removeClass("hidden");
+    });
+  
+    $("#remover-formacao").on("click", function () {
+      $("#formacoes-container .formacao").last().remove();
+      if ($("#formacoes-container .formacao").length === 0) {
+        $(this).addClass("hidden");
+      }
+    });
+  
+    // Adicionar experiência
+    $("#adicionar-experiencia").on("click", function () {
+      $("#experiencias-container").append(`
+        <div class="experiencia">
+          <label>Nome da Empresa</label>
+          <input type="text" name="empresa[]" placeholder="Ex: Tech Solutions">
+          <label>Cargo</label>
+          <input type="text" name="cargo[]" placeholder="Ex: Desenvolvedor Frontend">
+          <label>Tempo de Empresa</label>
+          <input type="text" name="tempo[]" placeholder="Ex: 1 ano e 6 meses">
+          <label>Atividades Exercidas</label>
+          <textarea name="atividades[]" placeholder="Descreva suas responsabilidades..."></textarea>
+        </div>
+      `);
+      $("#remover-experiencia").removeClass("hidden");
+    });
+  
+    $("#remover-experiencia").on("click", function () {
+      $("#experiencias-container .experiencia").last().remove();
+      if ($("#experiencias-container .experiencia").length === 0) {
+        $(this).addClass("hidden");
+      }
+    });
+  
+    // Adicionar idioma
+    $("#adicionar-idioma").on("click", function () {
+      $("#idiomas-container").append(`
+        <div class="idioma">
+          <label>Idioma</label>
+          <input type="text" name="idioma[]" placeholder="Ex: Inglês">
+          <label>Nível</label>
+          <select name="nivelIdioma[]">
+            <option disabled selected hidden>Selecione</option>
+            <option value="basico">Básico</option>
+            <option value="intermediario">Intermediário</option>
+            <option value="avancado">Avançado</option>
+            <option value="fluente">Fluente</option>
+          </select>
+        </div>
+      `);
+      $("#remover-idioma").removeClass("hidden");
+    });
+  
+    $("#remover-idioma").on("click", function () {
+      $("#idiomas-container .idioma").last().remove();
+      if ($("#idiomas-container .idioma").length === 0) {
+        $(this).addClass("hidden");
+      }
+    });
+  
+    // Adicionar habilidade
+    function adicionarHabilidade() {
+      const habilidade = $("#nova-habilidade").val().trim();
+      if (habilidade === "") return;
+  
+      const tag = $(`
+        <div class="habilidade-tag">
+          <label>
+            <input type="checkbox" name="habilidades[]" value="${habilidade}" checked>
+            ${habilidade}
+          </label>
+          <button type="button" class="remover-habilidade">&times;</button>
+        </div>
+      `);
+  
+      $("#habilidades-wrapper").append(tag);
+      $("#nova-habilidade").val("");
+  
+      tag.find(".remover-habilidade").on("click", function () {
+        tag.remove();
+      });
     }
-});
+  
+    $("#btn-adicionar-habilidade").on("click", adicionarHabilidade);
+    $("#nova-habilidade").on("keypress", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        adicionarHabilidade();
+      }
+    });
+  
+    // Validação de CPF
+    function validarCPF(cpf) {
+      cpf = cpf.replace(/[^\d]+/g, "");
+      if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+  
+      let soma = 0;
+      for (let i = 0; i < 9; i++) soma += parseInt(cpf[i]) * (10 - i);
+      let resto = (soma * 10) % 11;
+      if (resto === 10 || resto === 11) resto = 0;
+      if (resto !== parseInt(cpf[9])) return false;
+  
+      soma = 0;
+      for (let i = 0; i < 10; i++) soma += parseInt(cpf[i]) * (11 - i);
+      resto = (soma * 10) % 11;
+      if (resto === 10 || resto === 11) resto = 0;
+  
+      return resto === parseInt(cpf[10]);
+    }
+  
+    // Envio do formulário com validações
+    $("#curriculoForm").on("submit", function (e) {
+      // e.preventDefault();
+  
+      const nome = $("#nome").val().trim();
+      const cpf = $("#cpf").val().trim();
+      const email = $("#email").val().trim();
+      const telefone = $("#numero").val().trim();
+  
+      if (!nome || !cpf || !email || !telefone) {
+        alert("Por favor, preencha todos os campos obrigatórios.");
+        e.preventDefault();
+        return;
+      }
+  
+      if (!validarCPF(cpf)) {
+        $("#cpf").addClass("input-erro");
+        alert("CPF inválido!");
+        e.preventDefault();
+        return;
+      } else {
+        $("#cpf").removeClass("input-erro");
+      }
+  
+      // Validação da data de nascimento
+      var nascimento = $("#nascimento").val();
+      var partes = nascimento.split("/");
+      var dataNascimento = new Date(partes[2], partes[1] - 1, partes[0]);
+      var hoje = new Date();
+      var idade = hoje.getFullYear() - dataNascimento.getFullYear();
+      var m = hoje.getMonth() - dataNascimento.getMonth();
+      if (m < 0 || (m === 0 && hoje.getDate() < dataNascimento.getDate())) {
+        idade--;
+      }
+  
+      if (idade < 16) {
+        alert("Este site não gera currículo para trabalho infantojuvenil.");
+        return;
+      }
+  
+      const possuiFormacao = $('input[name="curso[]"]').toArray().some((input) => input.value.trim() !== "");
+      if (!possuiFormacao) {
+        alert("Adicione pelo menos uma formação.");
+        return;
+      }
+  
+      if (!$("#experiencias-container").hasClass("hidden")) {
+        const possuiExperiencia = $('input[name="empresa[]"]').toArray().some((input) => input.value.trim() !== "");
+        if (!possuiExperiencia) {
+          alert("Adicione pelo menos uma experiência.");
+          return;
+        }
+  
+        const tempos = $('input[name="tempo[]"]');
+        for (let i = 0; i < tempos.length; i++) {
+          if (tempos[i].value.trim() === "") {
+            alert("Preencha o tempo de empresa para cada experiência.");
+            return;
+          }
+        }
+      }
+  
+      const habilidadesMarcadas = $('input[name="habilidades[]"]:checked');
+      if (habilidadesMarcadas.length === 0) {
+        alert("Adicione pelo menos uma habilidade.");
+        return;
+      }
+  
+      const anosInicio = document.querySelectorAll('input[name="anoInicio[]"]');
+      const anosConclusao = document.querySelectorAll('input[name="anoConclusao[]"]');
+      const anoAtual = new Date().getFullYear();
+  
+      for (let i = 0; i < anosConclusao.length; i++) {
+        const inicio = anosInicio[i].value;
+        const conclusao = anosConclusao[i].value;
+  
+        if (conclusao && (isNaN(conclusao) || parseInt(conclusao) > anoAtual)) {
+          alert("Ano de conclusão inválido.");
+          return;
+        }
+  
+        if (inicio && conclusao && parseInt(inicio) > parseInt(conclusao)) {
+          alert("O ano de início não pode ser maior que o de conclusão.");
+          return;
+        }
+      }
+  
+      alert("Formulário enviado com sucesso!");
+      this.reset();
+      $("#contador").text("0");
+      $("#campoExperiencia, #experiencias-container, #adicionar-experiencia, #remover-experiencia").addClass("hidden");
+      $("#habilidades-container").empty();
+      $("#formacoes-container, #idiomas-container").empty();
+      $("#remover-formacao, #remover-idioma").addClass("hidden");
+    });
+  });
