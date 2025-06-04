@@ -5,6 +5,13 @@ $dbname = 'cadastro_curriculo';
 $username = 'root';
 $password = '';
 
+// Habilitar exibição e log de erros para depuração
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/../logs/php_error.log');
+
 try {
     // Criar conexão PDO
     $pdo = new PDO(
@@ -18,6 +25,7 @@ try {
         ]
     );
 } catch (PDOException $e) {
+    error_log('Erro na conexão com o banco de dados: ' . $e->getMessage());
     // Em ambiente de produção, você deve logar o erro e mostrar uma mensagem genérica
-    die('Erro na conexão com o banco de dados: ' . $e->getMessage());
+    die('Erro na conexão com o banco de dados.');
 }

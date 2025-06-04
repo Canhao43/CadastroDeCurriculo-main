@@ -1,0 +1,23 @@
+# Arquivos de configuração local (se você tiver algum separado com senhas)
+# ex: config.local.php
+
+# Pasta de uploads (geralmente não versionamos o conteúdo, apenas a pasta vazia ou a estrutura)
+# Se a pasta 'uploads' deve existir no repositório mas seu conteúdo ignorado:
+uploads/*
+!uploads/.htaccess 
+# A linha acima garante que o .htaccess dentro de uploads seja versionado, mas não os arquivos upados.
+# Se não quiser nem a pasta 'uploads' no repositório, apenas adicione:
+# uploads/
+
+# Arquivos de IDE e sistema operacional
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Arquivos temporários
+*.tmp

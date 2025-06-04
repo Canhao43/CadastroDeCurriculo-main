@@ -7,15 +7,15 @@
 <head>
     <meta charset="UTF-8" />
     <title>Criar Currículo - Sistema de Currículos</title>
-    <link rel="stylesheet" href="../CSS/style.css" />
+    <link rel="stylesheet" href="CSS/style.css" />
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</h1>
             <nav>
-                <a href="/user/dashboard" class="btn btn-secondary">Voltar ao Dashboard</a>
-                <a href="/logout" class="btn btn-secondary">Logout</a>
+                <a href="index.php?page=user_dashboard" class="btn btn-secondary">Voltar ao Dashboard</a>
+                <a href="index.php?page=logout" class="btn btn-secondary">Logout</a>
             </nav>
         </header>
 

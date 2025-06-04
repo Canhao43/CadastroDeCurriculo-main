@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Painel Administrativo - Sistema de Currículos</title>
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
     <div class="container">
@@ -15,8 +15,8 @@
             <h1>Painel Administrativo</h1>
             <nav>
                 <span>Bem-vindo, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>
-                <a href="<?php echo $base_url; ?>/user/dashboard" class="btn btn-secondary">Dashboard Usuário</a>
-                <a href="<?php echo $base_url; ?>/logout" class="btn btn-secondary">Logout</a>
+                <a href="index.php?page=user_dashboard" class="btn btn-secondary">Dashboard Usuário</a>
+                <a href="index.php?page=logout" class="btn btn-secondary">Logout</a>
             </nav>
         </header>
 
