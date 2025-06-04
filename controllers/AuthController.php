@@ -8,7 +8,7 @@ class AuthController {
 
     public function __construct($db) {
         $this->db = $db;
-        require_once 'models/User.php';
+        require_once __DIR__ . '/../models/User.php';
         $this->user = new User($db);
     }
 

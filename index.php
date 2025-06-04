@@ -6,7 +6,7 @@ session_start();
 require_once __DIR__ . '/includes/db.php';
 
 $page = $_GET['page'] ?? '';
-$action = $_GET['action'] ?? '';
+$action = $_POST['action'] ?? ($_GET['action'] ?? '');
 
 global $pdo;
 
