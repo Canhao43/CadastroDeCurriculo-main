@@ -17,6 +17,11 @@ class AuthController {
         require_once 'views/auth/login.php';
     }
 
+    // Exibir formulário de registro
+    public function showRegister() {
+        require_once 'views/auth/register.php';
+    }
+
     // Processar login
     public function loginUser() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

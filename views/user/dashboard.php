@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard do Usuário</title>
-    <link rel="stylesheet" href="CSS/style.css">
-    <script>
-        function confirmDelete() {
-            return confirm('Tem certeza que deseja excluir seu currículo?');
-        }
-    </script>
-</head>
-<body>
+<?php require_once __DIR__ . '/../partials/header.php'; ?>
+
+<script>
+    function confirmDelete() {
+        return confirm('Tem certeza que deseja excluir seu currículo?');
+    }
+</script>
+
     <h1>Bem-vindo, <?php echo htmlspecialchars($userName); ?>!</h1>
 
     <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
@@ -83,5 +78,5 @@
     <?php endif; ?>
 
     <p><a href="index.php?page=logout" class="button">Sair</a></p>
-</body>
-</html>
+
+<?php require_once __DIR__ . '/../partials/footer.php'; ?>

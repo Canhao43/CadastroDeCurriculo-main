@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Painel Administrativo</title>
-    <link rel="stylesheet" href="../CSS/base.css">
-    <link rel="stylesheet" href="../CSS/forms.css">
-    <link rel="stylesheet" href="../CSS/dashboard_admin.css">
-    <script>
-        function confirmDelete() {
-            return confirm('Tem certeza que deseja excluir este currículo?');
-        }
-    </script>
-</head>
-<body>
+<?php require_once __DIR__ . '/../partials/header.php'; ?>
+
+<script>
+    function confirmDelete() {
+        return confirm('Tem certeza que deseja excluir este currículo?');
+    }
+</script>
+
     <h1>Painel Administrativo - Bem-vindo, <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Admin'); ?>!</h1>
 
     <p>
@@ -80,5 +73,5 @@
     <?php else: ?>
         <p>Nenhum currículo cadastrado.</p>
     <?php endif; ?>
-</body>
-</html>
+
+<?php require_once __DIR__ . '/../partials/footer.php'; ?>
