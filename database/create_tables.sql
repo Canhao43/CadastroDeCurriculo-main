@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS curriculos (
     estado VARCHAR(100),
     formacoes TEXT,
     experiencias TEXT,
+    resumo_experiencia TEXT NULL DEFAULT NULL,
     habilidades TEXT,
     idiomas TEXT,
     linkedin VARCHAR(255),
