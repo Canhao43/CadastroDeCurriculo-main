@@ -43,7 +43,6 @@ O sistema permite que usuários se registrem, façam login e gerenciem seus pró
     * **Gerenciamento de Usuários:**
         * Listagem de todos os usuários do sistema.
         * Exclusão de usuários (que também remove o currículo e foto associados).
-        * Alteração do papel (role) de um usuário (user/admin).
     * **Estatísticas (Básico):** Visualização de total de usuários, total de currículos, e contagem por mês.
 * **Segurança:**
     * Prevenção contra SQL Injection utilizando Prepared Statements (PDO).
