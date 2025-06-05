@@ -22,6 +22,21 @@ class AdminController {
         AuthController::requireAdmin();
         
         $curriculos = $this->curriculo->getAll();
+
+        // Decodificar campos JSON para cada currículo e montar resumo
+        foreach ($curriculos as &$curriculo) {
+            $curriculo['formacoes'] = json_decode($curriculo['formacoes'], true) ?: [];
+            $curriculo['experiencias'] = json_decode($curriculo['experiencias'], true) ?: [];
+            $curriculo['habilidades'] = json_decode($curriculo['habilidades'], true) ?: [];
+            $curriculo['idiomas'] = json_decode($curriculo['idiomas'], true) ?: [];
+
+            // Montar resumo com última formação e última experiência
+            $ultimaFormacao = end($curriculo['formacoes']);
+            $ultimaExperiencia = end($curriculo['experiencias']);
+            $curriculo['ultima_formacao'] = $ultimaFormacao ? ($ultimaFormacao['curso'] ?? '') : '';
+            $curriculo['ultima_experiencia'] = $ultimaExperiencia ? ($ultimaExperiencia['empresa'] ?? '') : '';
+        }
+        unset($curriculo);
         
         require_once 'views/admin/dashboard.php';
     }
@@ -42,6 +57,24 @@ class AdminController {
             header("Location: index.php?page=admin_dashboard&error=Currículo não encontrado");
             exit;
         }
+
+        // Decodificar campos JSON para arrays
+        $curriculo['formacoes'] = json_decode($curriculo['formacoes'], true) ?: [];
+        $curriculo['experiencias'] = json_decode($curriculo['experiencias'], true) ?: [];
+        $curriculo['habilidades'] = json_decode($curriculo['habilidades'], true) ?: [];
+        $curriculo['idiomas'] = json_decode($curriculo['idiomas'], true) ?: [];
+
+        // Garantir que todos os campos necessários estejam definidos para a view
+        $curriculo['cpf'] = $curriculo['cpf'] ?? '';
+        $curriculo['ddi'] = $curriculo['ddi'] ?? '';
+        $curriculo['ddd'] = $curriculo['ddd'] ?? '';
+        $curriculo['genero'] = $curriculo['genero'] ?? '';
+        $curriculo['estado_civil'] = $curriculo['estado_civil'] ?? '';
+        $curriculo['nacionalidade'] = $curriculo['nacionalidade'] ?? '';
+        $curriculo['foto'] = $curriculo['foto'] ?? '';
+        $curriculo['linkedin'] = $curriculo['linkedin'] ?? '';
+        $curriculo['github'] = $curriculo['github'] ?? '';
+        $curriculo['site'] = $curriculo['site'] ?? '';
         
         require_once 'views/admin/view_resume.php';
     }
@@ -69,7 +102,7 @@ class AdminController {
                 unlink($curriculoData['foto']);
             }
 
-            if ($this->curriculo->deleteAdmin()) {
+            if ($this->curriculo->deleteById($id)) {
                 header("Location: index.php?page=admin_dashboard&success=Currículo deletado com sucesso!");
                 exit;
             } else {

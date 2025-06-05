@@ -1,0 +1,70 @@
+/* Estilos para o dashboard do usuário */
+
+.user-dashboard {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.user-dashboard h2 {
+  color: #222;
+  margin-bottom: 20px;
+  font-weight: 700;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+}
+
+.resume-preview {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.resume-preview img {
+  max-width: 100px;
+  border-radius: 8px;
+}
+
+.resume-preview .info {
+  flex: 1;
+}
+
+.resume-preview .info p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.resume-preview .info .name {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+.resume-preview .info .summary {
+  font-style: italic;
+  color: #666;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 1px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button.delete-button {
+  background-color: #f44336;
+}

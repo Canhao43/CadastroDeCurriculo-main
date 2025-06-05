@@ -186,6 +186,9 @@ button:hover, .btn:hover {
   background-color: #d1e7dd;
   color: #0f5132;
   border: 1px solid #badbcc;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
 }
 
 /* Pequenas melhorias visuais */
@@ -213,3 +216,67 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+/* Admin dashboard table improvements */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+.admin-table th, .admin-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: top;
+}
+
+.admin-table th {
+    background-color: #4CAF50;
+    color: white;
+    text-align: left;
+}
+
+.admin-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.admin-table tr:hover {
+    background-color: #ddd;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px 1px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.button.delete-button {
+    background-color: #f44336;
+}
+
+.error-message {
+    color: #a94442;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.success-message {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+</create_file>

@@ -74,5 +74,14 @@ class AuthController {
             exit;
         }
     }
+
+    // Verificar se usuário é admin
+    public static function requireAdmin() {
+        self::requireLogin();
+        if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
+            header("Location: index.php?page=user_dashboard&error=Acesso negado: permissão de administrador necessária");
+            exit;
+        }
+    }
 }
 ?>

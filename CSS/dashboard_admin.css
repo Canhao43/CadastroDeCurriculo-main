@@ -1,0 +1,105 @@
+/* Estilos para o dashboard e visualização do admin */
+
+.admin-dashboard {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.admin-dashboard h2 {
+  color: #222;
+  margin-bottom: 20px;
+  font-weight: 700;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+}
+
+/* Estilo para tabela de currículos */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+
+.admin-table th, .admin-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  vertical-align: top;
+}
+
+.admin-table th {
+  background-color: #4CAF50;
+  color: white;
+  text-align: left;
+}
+
+.admin-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.admin-table tr:hover {
+  background-color: #ddd;
+}
+
+/* Botões */
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 1px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button.delete-button {
+  background-color: #f44336;
+}
+
+/* Mensagens de erro e sucesso */
+.error-message {
+  color: #a94442;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.success-message {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border: 1px solid #d6e9c6;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+/* Visualização completa do currículo */
+.resume-details {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.resume-details h3 {
+  margin-top: 20px;
+  border-bottom: 1px solid #007bff;
+  padding-bottom: 5px;
+  color: #007bff;
+}
+
+.resume-details p {
+  margin: 8px 0;
+}
+
+.resume-details img {
+  max-width: 150px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}

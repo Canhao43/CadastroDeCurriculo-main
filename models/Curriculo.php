@@ -138,4 +138,16 @@ class Curriculo {
         $count = $stmt->fetchColumn();
         return $count > 0;
     }
+
+    // Deletar currículo pelo ID (admin)
+    public function deleteById($id) {
+        $sql = "DELETE FROM curriculos WHERE id = :id";
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }

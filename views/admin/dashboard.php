@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Painel Administrativo</title>
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/base.css">
+    <link rel="stylesheet" href="../CSS/forms.css">
+    <link rel="stylesheet" href="../CSS/dashboard_admin.css">
     <script>
         function confirmDelete() {
             return confirm('Tem certeza que deseja excluir este currículo?');
@@ -28,7 +30,7 @@
 
     <h2>Todos os Currículos</h2>
     <?php if (!empty($curriculos)): ?>
-        <table border="1" cellpadding="5" cellspacing="0">
+        <table border="1" cellpadding="5" cellspacing="0" class="admin-table">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -42,8 +44,8 @@
             <tbody>
                 <?php foreach ($curriculos as $curriculo): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($curriculo['nome']); ?></td>
-                        <td><?php echo htmlspecialchars($curriculo['email']); ?></td>
+                        <td><?php echo htmlspecialchars($curriculo['nome'] ?? 'Não informado'); ?></td>
+                        <td><?php echo htmlspecialchars($curriculo['email'] ?? 'Não informado'); ?></td>
                         <td>
                             <?php if (!empty($curriculo['foto']) && file_exists($curriculo['foto'])): ?>
                                 <img src="<?php echo htmlspecialchars($curriculo['foto']); ?>" alt="Foto" style="max-width:100px;">
@@ -63,11 +65,11 @@
                                 echo $resumo;
                             ?>
                         </td>
-                        <td><?php echo htmlspecialchars($curriculo['created_at']); ?></td>
+                        <td><?php echo htmlspecialchars($curriculo['criado_em'] ?? 'Não informado'); ?></td>
                         <td>
                             <a href="index.php?page=view_resume_admin&id=<?php echo $curriculo['id']; ?>" class="button">Ver Currículo</a>
                             <form method="POST" action="index.php?action=deleteResumeAdmin" style="display:inline;" onsubmit="return confirmDelete();">
-                                <input type="hidden" name="id" value="<?php echo $curriculo['id']; ?>">
+                                <input type="hidden" name="id" value="<?php echo $curriculo['id'] ?? ''; ?>">
                                 <button type="submit" class="button delete-button">Excluir</button>
                             </form>
                         </td>
